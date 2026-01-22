@@ -1,17 +1,13 @@
 /**
  * Mock AI processor for testing and demo purposes.
- * Returns realistic pre-defined digest responses without making API calls.
- * 
- * This allows the application to be fully functional without an OpenAI API key,
- * making it easier to test and demo the consolidation logic.
+ * Returns realistic pre-defined digest responses based on the REST app discussion.
  */
 
 import { Digest, NormalizedEntry } from "@/lib/types";
 
 /**
  * Generate a mock digest based on the input entries.
- * The mock analyzes basic patterns in the data to generate contextually
- * relevant (but not AI-powered) responses.
+ * Contextually relevant to the REST sleep app welcome screen discussion.
  */
 export function generateMockDigest(entries: NormalizedEntry[]): Digest {
   // Extract unique authors from the entries
@@ -28,160 +24,173 @@ export function generateMockDigest(entries: NormalizedEntry[]): Digest {
 
   return {
     executiveSummary: {
-      whatWasDiscussed: `The team discussed a checkout flow redesign initiative spanning ${slackCount} Slack messages and ${loomCount > 0 ? `${loomCount} Loom video comments` : "design walkthroughs"}. Key participants included ${authors.slice(0, 3).join(", ")}${authors.length > 3 ? ` and ${authors.length - 3} others` : ""}.`,
-      whyItMatters: "The current checkout flow has a 23% drop-off rate at the payment step, with 67% of affected users on mobile. Addressing this is critical for revenue and user experience.",
-      whatChanged: "The team aligned on a multi-step checkout approach for phase 1, with wallet integrations planned for phase 2. User testing is scheduled for next week with Emily Watson leading the research effort.",
+      whatWasDiscussed: `El equipo discutió el rediseño del welcome screen y los disclaimers legales para la app REST. La conversación abarcó ${slackCount} mensajes de Slack y ${loomCount > 0 ? `${loomCount} comentarios de Loom` : "walkthroughs de diseño"}. Participaron ${authors.slice(0, 3).join(", ")}${authors.length > 3 ? ` y ${authors.length - 3} más` : ""}.`,
+      whyItMatters: "El welcome screen es el primer punto de contacto con usuarios nuevos y debe balancear cobertura legal (términos, +18, disclaimers de AI) con una buena experiencia de usuario que no aumente el drop-off en el onboarding.",
+      whatChanged: "Se decidió usar el copy 'Before We Begin' con CTA visible desde el inicio. Se descartaron los íconos por agregar complejidad visual. El scroll obligatorio se eliminó para reducir fricción, priorizando UX sobre compliance estricto.",
     },
 
     timeline: [
       {
         timestamp: startTime.toISOString(),
-        summary: "Discussion initiated about checkout flow drop-off rates and mobile UX issues",
-        participants: ["Sarah Chen"],
+        summary: "Pamela presenta propuestas de diseño para welcome screen y legal disclaimers, basadas en referencia de Ash",
+        participants: ["Pamela Rocío Schiavone", "Daniela Riesgo"],
         significance: "high",
       },
       {
         timestamp: new Date(startTime.getTime() + 3600000).toISOString(),
-        summary: "Debate between multi-step vs single-page checkout approaches",
-        participants: ["Alex Rivera", "Emily Watson", "Marcus Johnson"],
+        summary: "Federico da feedback inicial: prefiere versión 2, le gustan los íconos pero preocupa el ícono rojo alarmante",
+        participants: ["Federico Arnoletto"],
         significance: "medium",
       },
       {
         timestamp: new Date(startTime.getTime() + 7200000).toISOString(),
-        summary: "Engineering provided timeline estimates: multi-step (1 sprint), wallets (2 sprints)",
-        participants: ["David Park"],
+        summary: "Debate sobre scroll obligatorio vs CTA visible: tensión entre cobertura legal y drop-off",
+        participants: ["Pamela Rocío Schiavone", "Federico Arnoletto"],
         significance: "high",
       },
       {
-        timestamp: new Date(startTime.getTime() + 10800000).toISOString(),
-        summary: "Decision made to prioritize multi-step form, defer wallet integration",
-        participants: ["Sarah Chen", "David Park"],
+        timestamp: new Date(startTime.getTime() + 86400000).toISOString(),
+        summary: "Eduardo da guidance final: 'Before We Begin', sin íconos, más spacing, CTA visible desde inicio",
+        participants: ["Eduardo"],
         significance: "high",
       },
       {
         timestamp: endTime.toISOString(),
-        summary: "Action items assigned and user testing planned for validation",
-        participants: ["Emily Watson", "Marcus Johnson"],
-        significance: "medium",
+        summary: "Decisión tomada: ir con comportamiento de CTA de primera versión, Daniela implementa cambios",
+        participants: ["Pamela Rocío Schiavone", "Daniela Riesgo"],
+        significance: "high",
       },
     ],
 
     decisions: {
       decided: [
         {
-          description: "Implement multi-step checkout form as phase 1 priority",
-          context: "Addresses the core UX issue of cramped mobile forms with shorter implementation timeline",
-          participants: ["Sarah Chen", "David Park", "Marcus Johnson"],
+          description: "Usar copy 'Before We Begin' en lugar de 'Before You Start' o 'Use REST with Confidence'",
+          context: "Eduardo consideró que 'Use REST with Confidence' no refleja la verdadera razón del disclaimer (protección legal)",
+          participants: ["Eduardo", "Pamela Rocío Schiavone"],
         },
         {
-          description: "Keep guest checkout option",
-          context: "Data shows 40% of users abandon when forced to create an account",
-          participants: ["Alex Rivera", "Sarah Chen"],
+          description: "CTA 'I Understand' visible desde el inicio, sin requerir scroll completo",
+          context: "Para reducir drop-off y confusión. El 99% de usuarios no leerá el contenido de todas formas",
+          participants: ["Eduardo", "Federico Arnoletto", "Pamela Rocío Schiavone"],
         },
         {
-          description: "Wallet integrations (Apple Pay, Google Pay) planned for phase 2",
-          context: "Requires 2 sprints vs 1 sprint for multi-step form; deferred to reduce initial scope",
-          participants: ["Sarah Chen", "David Park"],
+          description: "No incluir íconos en la vista de disclaimers",
+          context: "Eduardo consideró que agregan demasiado elemento adicional y hacen más difícil parsear el contenido",
+          participants: ["Eduardo"],
         },
         {
-          description: "Order summary should be collapsible on mobile",
-          context: "Users want to focus on the form without scrolling past summary",
-          participants: ["Sarah Chen", "Marcus Johnson"],
+          description: "Aumentar spacing entre elementos para mejor legibilidad",
+          context: "La versión actual se veía 'apiñada' y costaba separar los renglones visualmente",
+          participants: ["Eduardo"],
+        },
+        {
+          description: "Mantener disclaimer 'Powered by AI' en el welcome screen",
+          context: "Necesario por el disclaimer que ya existía, texto puede ajustarse después",
+          participants: ["Eduardo"],
         },
       ],
       pending: [
         {
-          description: "Success metrics definition: completion rate vs time-to-complete",
-          context: "Emily raised this question but no final decision was made",
-          participants: ["Emily Watson"],
+          description: "Definir copy final para el welcome screen (varias opciones presentadas)",
+          context: "Eduardo confía en el equipo para elegir entre las opciones propuestas",
+          participants: ["Pamela Rocío Schiavone", "Daniela Riesgo"],
         },
         {
-          description: "Sample data approach for new user onboarding",
-          context: "Needs engineering assessment for data model implications",
-          participants: ["Nina Patel", "Chris Morgan"],
+          description: "Evaluar si 'Work in Progress' debe mantenerse en los disclaimers",
+          context: "Eduardo sugiere sacarlo porque alarga el contenido y no es un disclaimer clave",
+          participants: ["Eduardo", "Federico Arnoletto"],
+        },
+        {
+          description: "Revisar imagen del welcome screen en el futuro",
+          context: "No es prioridad ahora pero hay oportunidad de mejora",
+          participants: ["Eduardo"],
         },
       ],
       blocked: [
         {
-          description: "Guest cart session handling",
-          context: "Current backend doesn't support guest carts well; needs backend team discussion",
-          participants: ["David Park"],
+          description: "Visibilidad del disclaimer +18",
+          context: "Federico prefiere que esté siempre visible por temas legales, pero no hay decisión final",
+          participants: ["Federico Arnoletto"],
         },
       ],
     },
 
     actionItems: [
       {
-        action: "Complete competitive analysis of Shopify, Stripe Checkout, and Amazon checkout flows",
-        owner: "Alex Rivera",
+        action: "Implementar ajustes de UI: más spacing, sin íconos, tipografía accesible",
+        owner: "Daniela Riesgo",
         status: "pending",
-        context: "To inform multi-step checkout design decisions",
+        context: "Puede avanzar inmediatamente con estos cambios",
       },
       {
-        action: "Finalize Figma prototype for mobile and desktop checkout (with collapsible order summary)",
-        owner: "Marcus Johnson",
+        action: "Actualizar copy a 'Before We Begin' con estilo REST",
+        owner: "Daniela Riesgo",
         status: "pending",
-        context: "Due by Wednesday EOD for user testing",
+        context: "Pamela pasó el copy aprobado",
       },
       {
-        action: "Update card payment icons to official brand assets",
-        owner: "Marcus Johnson",
+        action: "Preparar prototipo con CTA visible desde el inicio",
+        owner: "Daniela Riesgo",
         status: "pending",
-        context: "Current icons look dated",
+        context: "Comportamiento de primera versión confirmado",
       },
       {
-        action: "Conduct user testing with 5-7 participants",
-        owner: "Emily Watson",
+        action: "Definir copy final para welcome screen entre opciones propuestas",
+        owner: "Pamela Rocío Schiavone",
         status: "pending",
-        context: "Scheduled for next week; requires prototype by Thursday",
+        context: "Eduardo confía en el equipo para la decisión",
       },
       {
-        action: "Discuss backend blocker for guest cart session handling",
-        owner: "David Park",
+        action: "Esperar aprobación antes de avanzar con cambios en welcome screen",
+        owner: "Daniela Riesgo",
         status: "blocked",
-        context: "May push timeline by a few days",
+        context: "Vista delicada que requiere OK del equipo",
       },
       {
-        action: "Write simplified copy for workspace explanation tooltip",
-        owner: "Chris Morgan",
+        action: "Revisar con legales el tema de longitud de disclaimers",
+        owner: null,
         status: "pending",
-        context: "Using 'team's home base' positioning for non-technical audience",
+        context: "Pamela mencionó que no es área del equipo de diseño",
       },
     ],
 
     openQuestions: [
-      "What should be the primary success metric: completion rate or time-to-complete?",
-      "How much engineering effort is required for sample data in onboarding?",
-      "Should shipping costs be shown on the cart page before checkout starts?",
-      "What's the exact timeline impact of the guest cart backend blocker?",
+      "¿El disclaimer de +18 debe estar siempre visible o puede ir en el scroll?",
+      "¿Mantenemos 'Work in Progress' en los disclaimers o lo eliminamos?",
+      "¿Cuál es el copy final para el CTA del welcome screen: 'Get Started' vs 'Let's build better sleep habits'?",
+      "¿Cómo linkear visualmente el welcome screen con la splash para mantener identidad de REST?",
     ],
 
     topicClusters: [
       {
-        topic: "Checkout UX & Flow",
-        entries: Math.floor(entries.length * 0.5),
-        summary: "Discussion around multi-step vs single-page checkout, mobile optimization, and progress indicators",
+        topic: "Legal Disclaimers & Copy",
+        entries: Math.floor(entries.length * 0.4),
+        summary: "Discusión sobre longitud del copy, opciones de texto, y balance entre cobertura legal y legibilidad",
       },
       {
-        topic: "Engineering & Implementation",
-        entries: Math.floor(entries.length * 0.25),
-        summary: "Timeline estimates, backend blockers, and technical feasibility discussions",
+        topic: "UX & Interacción",
+        entries: Math.floor(entries.length * 0.35),
+        summary: "Debate sobre scroll obligatorio, visibilidad del CTA, y preocupaciones por drop-off",
       },
       {
-        topic: "User Research & Testing",
+        topic: "Diseño Visual",
         entries: Math.floor(entries.length * 0.25),
-        summary: "User testing planning, research findings, and validation approach",
+        summary: "Feedback sobre íconos, spacing, tipografía accesible, y welcome screen flashy",
       },
     ],
 
     disagreements: [
-      "Emily Watson expressed concern that multi-step checkout could add friction, while Marcus Johnson argued studies show progressive disclosure improves completion rates.",
+      "Pamela quería scroll obligatorio para mayor protección legal; Eduardo y Federico priorizaron reducir drop-off con CTA visible",
+      "Federico le gustaban los íconos conceptualmente; Eduardo los consideró demasiado elemento que dificulta el parsing",
+      "Tensión entre 'mayor cobertura legal' (Federico) vs 'mejor legibilidad' (equipo general)",
     ],
 
     repeatedFeedback: [
-      "Multiple team members emphasized the importance of keeping guest checkout visible and accessible",
-      "The 23% drop-off rate at payment step was referenced several times as the core problem to solve",
-      "Mobile experience was consistently prioritized over desktop throughout the discussion",
+      "Múltiples menciones de que el 99% de usuarios no leerá el contenido legal",
+      "Preocupación recurrente por el drop-off en el onboarding",
+      "Énfasis en que la tipografía actual de la referencia (Ash) no pasa accesibilidad",
+      "Necesidad de que el usuario pueda 'escanear' rápidamente la información",
     ],
   };
 }

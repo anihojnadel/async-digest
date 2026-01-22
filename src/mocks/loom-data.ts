@@ -1,169 +1,155 @@
 /**
  * Mock Loom video data for testing and demo purposes.
- * Simulates video transcripts and comments from product walkthroughs.
+ * Based on real product walkthroughs about welcome screens and legal disclaimers.
  */
 
 import { NormalizedEntry } from "@/lib/types";
 
 /**
- * Mock Loom video walkthrough of the checkout flow designs.
+ * Mock Loom video: Pamela's presentation on welcome screen and legal designs.
  * Combines transcript segments and viewer comments.
  */
 export const mockLoomVideo1: NormalizedEntry[] = [
-  // Transcript segments (from the video author)
+  // Transcript segments from Pamela's presentation
   {
     source: "loom",
-    author: "Marcus Johnson",
-    timestamp: "2024-01-15T16:00:00Z",
+    author: "Pamela Rocío Schiavone",
+    timestamp: "2026-01-07T14:00:00Z",
     content:
-      "[Video Transcript] Hey everyone, I wanted to walk you through the checkout redesign mockups before our next sync. I'm going to show you both the mobile and desktop versions.",
+      "[Video Transcript] Hola team, les cuento lo que estuvimos viendo con Dani. Les comparto el proceso: qué cosas puede hacer Dani de inmediato y cuáles necesitan confirmaciones, sobre todo de copy.",
   },
   {
     source: "loom",
-    author: "Marcus Johnson",
-    timestamp: "2024-01-15T16:01:00Z",
+    author: "Pamela Rocío Schiavone",
+    timestamp: "2026-01-07T14:01:00Z",
     content:
-      "[Video Transcript] Starting with mobile - you can see I've broken the checkout into three clear steps: Shipping, Payment, and Review. Each step has its own screen which reduces cognitive load.",
+      "[Video Transcript] Arrancamos con la referencia de Ash. Dani tomó lo mismo y lo replicó para REST. El primer ajuste es que la vista de Ash tiene la tipografía muy chiquita - esto no pasa accesibilidad. La tipografía debería ir en este mínimo.",
   },
   {
     source: "loom",
-    author: "Marcus Johnson",
-    timestamp: "2024-01-15T16:02:30Z",
+    author: "Pamela Rocío Schiavone",
+    timestamp: "2026-01-07T14:02:30Z",
     content:
-      "[Video Transcript] Notice the progress indicator at the top - it shows users exactly where they are in the process. This directly addresses the feedback about users feeling lost.",
+      "[Video Transcript] Hay propuestas de copy: una muy similar a Ash, y otras más interesantes asociadas a REST. Opciones como 'Use REST with Confidence' o approaches más humanos. Me quedé con el que más me gustaba pero dejo abierto para que veamos juntos.",
   },
   {
     source: "loom",
-    author: "Marcus Johnson",
-    timestamp: "2024-01-15T16:04:00Z",
+    author: "Pamela Rocío Schiavone",
+    timestamp: "2026-01-07T14:04:00Z",
     content:
-      "[Video Transcript] For the payment step, I've added icons for accepted card types and included the secure checkout badge. Trust signals are crucial here given our drop-off data.",
+      "[Video Transcript] Pasé los copies por GPT para feedback legal. Me generó copies con marco legal. Es importante considerar las longitudes - si el user hace scanning, puede ver los steps con más claridad si no tenemos tanto copy.",
   },
   {
     source: "loom",
-    author: "Marcus Johnson",
-    timestamp: "2024-01-15T16:05:30Z",
+    author: "Pamela Rocío Schiavone",
+    timestamp: "2026-01-07T14:05:30Z",
     content:
-      "[Video Transcript] One thing I'm not sure about - should the order summary be sticky on the side or collapsible on mobile? I'd love feedback on this.",
+      "[Video Transcript] El tema de edad: si ponemos '+18' entre paréntesis, uno lo escanea rápido. También propongo checkboxes para 'I understand' en términos y condiciones, así el usuario confirma que lo leyó.",
   },
   {
     source: "loom",
-    author: "Marcus Johnson",
-    timestamp: "2024-01-15T16:07:00Z",
+    author: "Pamela Rocío Schiavone",
+    timestamp: "2026-01-07T14:07:00Z",
     content:
-      "[Video Transcript] Switching to desktop now. The layout uses a two-column approach - form on the left, order summary on the right. Pretty standard but effective.",
+      "[Video Transcript] Respecto al scroll: el botón va a estar siempre visible pero disabled hasta que el usuario scrollea completo. El disclaimer de términos aparece al final. Todo se oculta detrás del título al scrollear.",
   },
   {
     source: "loom",
-    author: "Marcus Johnson",
-    timestamp: "2024-01-15T16:08:30Z",
+    author: "Pamela Rocío Schiavone",
+    timestamp: "2026-01-07T14:09:00Z",
     content:
-      "[Video Transcript] I've also prepared an alternative version where all steps are visible on one page with accordion-style sections. Let me know which approach you prefer.",
-  },
-  // Comments on the video
-  {
-    source: "loom",
-    author: "Sarah Chen",
-    timestamp: "2024-01-15T17:30:00Z",
-    content:
-      "[Loom Comment] Love the progress indicator! For the order summary question - I think collapsible on mobile is better. Users want to focus on the form, not scroll past a big summary.",
+      "[Video Transcript] Para la versión con íconos: si uno escanea rápido, ve que hay alguna alerta, algo de +18. Sabemos que la mayoría no lo van a leer, pero queda más robusto con un escaneo visual de la información.",
   },
   {
     source: "loom",
-    author: "Alex Rivera",
-    timestamp: "2024-01-15T18:00:00Z",
+    author: "Pamela Rocío Schiavone",
+    timestamp: "2026-01-07T14:11:00Z",
     content:
-      "[Loom Comment] Great walkthrough Marcus. Quick note - the card icons look a bit dated. Can we use the official brand assets from Visa/Mastercard?",
+      "[Video Transcript] Para la welcome screen: se me ocurrió hacerla más flashy. Opciones con el logo de AI, o algo artístico que linkee con la splash. La intención es que el user asocie RESTY con la experiencia AI del programa.",
   },
   {
     source: "loom",
-    author: "Emily Watson",
-    timestamp: "2024-01-15T18:45:00Z",
+    author: "Pamela Rocío Schiavone",
+    timestamp: "2026-01-07T14:13:00Z",
     content:
-      "[Loom Comment] I prefer the multi-step mobile version over the accordion desktop version. The accordion feels like it could get confusing with sections opening and closing.",
-  },
-  {
-    source: "loom",
-    author: "David Park",
-    timestamp: "2024-01-15T19:15:00Z",
-    content:
-      "[Loom Comment] From an engineering perspective, the multi-step approach is easier to implement and maintain. The accordion would require more state management.",
-  },
-  {
-    source: "loom",
-    author: "Sarah Chen",
-    timestamp: "2024-01-15T20:00:00Z",
-    content:
-      "[Loom Comment] Sounds like we have consensus on multi-step. Marcus, can you finalize the mobile designs with collapsible order summary? We'll use those for testing.",
-  },
-  {
-    source: "loom",
-    author: "Marcus Johnson",
-    timestamp: "2024-01-15T21:00:00Z",
-    content:
-      "[Loom Comment] @Sarah will do! I'll update the card icons too @Alex. Expect the final Figma link by Wednesday morning.",
+      "[Video Transcript] Dani puede ir aplicando los cambios de UI. Para la welcome, todavía no va a avanzar porque es una vista delicada y necesitamos el OK de ustedes. Dejo todos los assets en una carpeta.",
   },
 ];
 
 /**
- * Mock Loom video about user research findings.
+ * Mock Loom video: Eduardo's feedback on the designs.
  */
 export const mockLoomVideo2: NormalizedEntry[] = [
   {
     source: "loom",
-    author: "Emily Watson",
-    timestamp: "2024-01-17T10:00:00Z",
+    author: "Eduardo",
+    timestamp: "2026-01-08T10:00:00Z",
     content:
-      "[Video Transcript] Hi team, sharing findings from our user research sessions this week. I interviewed 6 users about their checkout experiences.",
+      "[Video Transcript] Team, muy bueno esto que armaron Pam y Dani. Les doy guidance rápido de por dónde ir. A nivel texto, iría por 'Before We Begin' - me gusta más que 'Before You Start'.",
   },
   {
     source: "loom",
-    author: "Emily Watson",
-    timestamp: "2024-01-17T10:02:00Z",
+    author: "Eduardo",
+    timestamp: "2026-01-08T10:02:00Z",
     content:
-      "[Video Transcript] Key finding number one: 5 out of 6 users mentioned they want to see shipping costs BEFORE entering payment info. This came up repeatedly.",
+      "[Video Transcript] 'Use REST with Confidence' - no sé si esto se trata realmente de usar REST with confidence. La esencia de esto no es esa, es más bien protección legal. Así que no iría con ese approach.",
   },
   {
     source: "loom",
-    author: "Emily Watson",
-    timestamp: "2024-01-17T10:04:00Z",
+    author: "Eduardo",
+    timestamp: "2026-01-08T10:04:00Z",
     content:
-      "[Video Transcript] Finding two: Users are confused by the difference between billing and shipping address. They asked 'why do you need both?' Consider auto-filling billing from shipping.",
+      "[Video Transcript] Me gusta el color que usaron. Lo del 'Powered by AI' me parece bien por el disclaimer que teníamos. La duda es el 'Work in Progress' - siento que hace largo el contenido y es más un mensajito buena onda que un disclaimer clave.",
   },
   {
     source: "loom",
-    author: "Emily Watson",
-    timestamp: "2024-01-17T10:06:00Z",
+    author: "Eduardo",
+    timestamp: "2026-01-08T10:06:00Z",
     content:
-      "[Video Transcript] Finding three: The 'Continue as Guest' option was missed by 3 users. It's too small and positioned below the login form. We should make it more prominent.",
+      "[Video Transcript] El botón que no se activa hasta scrollear: tengo mixed feelings. Por un lado fuerza compliance, por otro puede aumentar drop-off y generar confusión. Creo que dejarlo visible desde el inicio es good enough para lo legal.",
   },
   {
     source: "loom",
-    author: "Emily Watson",
-    timestamp: "2024-01-17T10:08:00Z",
+    author: "Eduardo",
+    timestamp: "2026-01-08T10:08:00Z",
     content:
-      "[Video Transcript] I've added all the session recordings to the research repository if anyone wants to watch the full interviews. Happy to discuss any of these findings.",
+      "[Video Transcript] Los íconos: creo que es demasiado elemento adicional. No es tan claro y hace más difícil parsear. La clave es que los títulos se lean bien. Lo veo un poco apiñado, me gustaba más spacing.",
   },
   {
     source: "loom",
-    author: "Sarah Chen",
-    timestamp: "2024-01-17T11:30:00Z",
+    author: "Eduardo",
+    timestamp: "2026-01-08T10:10:00Z",
     content:
-      "[Loom Comment] This is gold, Emily. The shipping cost visibility is critical - we should show estimated shipping on the cart page BEFORE checkout even starts.",
+      "[Video Transcript] Para recapitular: texto 'Before We Begin', me gusta el color, ajustar estilos pero con más spacing. Propongo sacar 'Work in Progress'. A nivel CTA iría con 'I Understand' visible desde el principio para no aumentar drop-off.",
   },
   {
     source: "loom",
-    author: "Marcus Johnson",
-    timestamp: "2024-01-17T12:00:00Z",
+    author: "Eduardo",
+    timestamp: "2026-01-08T10:12:00Z",
     content:
-      "[Loom Comment] The guest checkout visibility issue is easily fixed. I'll make the button the same size as the login button in the next iteration.",
+      "[Video Transcript] Para la welcome screen: Get Started me cierra más como CTA. 'Let's build better sleep habits' no me queda claro que sea el core. Confío en ustedes para elegir la opción final. Es un lindo salto de donde estamos.",
+  },
+  // Comments on Eduardo's video
+  {
+    source: "loom",
+    author: "Pamela Rocío Schiavone",
+    timestamp: "2026-01-08T11:30:00Z",
+    content:
+      "[Loom Comment] Gracias por el feedback Edu! Entendido lo del spacing y los íconos. Vamos con 'Before We Begin' y CTA visible. Le paso a Dani para implementar.",
   },
   {
     source: "loom",
-    author: "Alex Rivera",
-    timestamp: "2024-01-17T14:00:00Z",
+    author: "Daniela Riesgo",
+    timestamp: "2026-01-08T12:00:00Z",
     content:
-      "[Loom Comment] Regarding billing/shipping - we have legal requirements to collect billing address for fraud prevention. But we can definitely auto-fill and let users change if different.",
+      "[Loom Comment] Perfecto, ajusto el spacing y saco los íconos. Para mañana tengo el prototipo actualizado.",
+  },
+  {
+    source: "loom",
+    author: "Federico Arnoletto",
+    timestamp: "2026-01-08T12:30:00Z",
+    content:
+      "[Loom Comment] De acuerdo con todo. Solo un punto: ¿mantenemos el disclaimer de +18 visible o lo movemos al scroll? Por temas legales prefiero que esté siempre visible.",
   },
 ];
 
@@ -171,15 +157,14 @@ export const mockLoomVideo2: NormalizedEntry[] = [
  * Map of video identifiers to mock data.
  */
 export const loomMockDataMap: Record<string, NormalizedEntry[]> = {
-  "checkout-walkthrough": mockLoomVideo1,
-  "user-research": mockLoomVideo2,
-  // Default video for any unrecognized identifier
+  "welcome-screen-walkthrough": mockLoomVideo1,
+  "design-feedback": mockLoomVideo2,
+  "legal-review": mockLoomVideo2,
   default: mockLoomVideo1,
 };
 
 /**
  * Get mock Loom data for a given video identifier.
- * Falls back to default data if identifier is not found.
  */
 export function getMockLoomData(identifier: string): NormalizedEntry[] {
   return loomMockDataMap[identifier] || loomMockDataMap["default"];
