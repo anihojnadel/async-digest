@@ -4,7 +4,6 @@
  * DigestView Component
  * 
  * Main component for rendering the complete digest output.
- * Orchestrates all sub-components and provides overall layout.
  */
 
 import { Digest } from "@/lib/types";
@@ -13,6 +12,7 @@ import { Timeline } from "./Timeline";
 import { Decisions } from "./Decisions";
 import { ActionItems } from "./ActionItems";
 import { OpenQuestions } from "./OpenQuestions";
+import { CollapsibleSection } from "./CollapsibleSection";
 
 interface DigestViewProps {
   digest: Digest;
@@ -82,12 +82,12 @@ function AIModeIndicator({ mode }: { mode: "openai" | "mock" }) {
 
 function TopicClusters({ clusters }: { clusters: Digest["topicClusters"] }) {
   return (
-    <section className="bg-[#1E1B2E] rounded-2xl p-5 border border-[#3D3654]">
-      <h2 className="text-white font-semibold mb-4 flex items-center gap-2">
-        <span className="w-8 h-8 rounded-full bg-[#8B5CF6]/20 flex items-center justify-center text-sm">🏷️</span>
-        Topics Discussed
-      </h2>
-      
+    <CollapsibleSection 
+      title="Topics Discussed" 
+      icon="🏷️" 
+      badge={clusters.length}
+      defaultOpen={true}
+    >
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {clusters.map((cluster, index) => (
           <div 
@@ -104,7 +104,7 @@ function TopicClusters({ clusters }: { clusters: Digest["topicClusters"] }) {
           </div>
         ))}
       </div>
-    </section>
+    </CollapsibleSection>
   );
 }
 
@@ -119,13 +119,15 @@ function AdditionalInsights({
     return null;
   }
 
+  const totalCount = disagreements.length + repeatedFeedback.length;
+
   return (
-    <section className="bg-[#1E1B2E] rounded-2xl p-5 border border-[#3D3654]">
-      <h2 className="text-white font-semibold mb-4 flex items-center gap-2">
-        <span className="w-8 h-8 rounded-full bg-[#8B5CF6]/20 flex items-center justify-center text-sm">💡</span>
-        Additional Insights
-      </h2>
-      
+    <CollapsibleSection 
+      title="Additional Insights" 
+      icon="💡" 
+      badge={totalCount}
+      defaultOpen={false}
+    >
       <div className="space-y-5">
         {disagreements.length > 0 && (
           <div>
@@ -165,6 +167,6 @@ function AdditionalInsights({
           </div>
         )}
       </div>
-    </section>
+    </CollapsibleSection>
   );
 }

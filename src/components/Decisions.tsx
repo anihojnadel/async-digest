@@ -3,13 +3,11 @@
 /**
  * Decisions Component
  * 
- * Displays decisions organized by status:
- * - Decided: Confirmed decisions
- * - Pending: Proposals awaiting confirmation
- * - Blocked: Decisions blocked by dependencies
+ * Displays decisions organized by status.
  */
 
 import { Decision } from "@/lib/types";
+import { CollapsibleSection } from "./CollapsibleSection";
 
 interface DecisionsProps {
   decisions: {
@@ -20,22 +18,22 @@ interface DecisionsProps {
 }
 
 export function Decisions({ decisions }: DecisionsProps) {
-  const hasDecisions = 
-    decisions.decided.length > 0 || 
-    decisions.pending.length > 0 || 
-    decisions.blocked.length > 0;
+  const totalCount = 
+    decisions.decided.length + 
+    decisions.pending.length + 
+    decisions.blocked.length;
 
-  if (!hasDecisions) {
+  if (totalCount === 0) {
     return null;
   }
 
   return (
-    <section className="bg-[#1E1B2E] rounded-2xl p-5 border border-[#3D3654]">
-      <h2 className="text-white font-semibold mb-4 flex items-center gap-2">
-        <span className="w-8 h-8 rounded-full bg-[#8B5CF6]/20 flex items-center justify-center text-sm">🎯</span>
-        Decisions
-      </h2>
-      
+    <CollapsibleSection 
+      title="Decisions" 
+      icon="🎯" 
+      badge={totalCount}
+      defaultOpen={true}
+    >
       <div className="space-y-5">
         {decisions.decided.length > 0 && (
           <DecisionGroup 
@@ -61,7 +59,7 @@ export function Decisions({ decisions }: DecisionsProps) {
           />
         )}
       </div>
-    </section>
+    </CollapsibleSection>
   );
 }
 

@@ -4,10 +4,10 @@
  * Timeline Component
  * 
  * Displays a condensed chronological view of how the discussion evolved.
- * Shows key moments with significance indicators.
  */
 
 import { TimelineEvent } from "@/lib/types";
+import { CollapsibleSection } from "./CollapsibleSection";
 
 interface TimelineProps {
   events: TimelineEvent[];
@@ -19,27 +19,27 @@ export function Timeline({ events }: TimelineProps) {
   }
 
   return (
-    <section className="bg-[#1E1B2E] rounded-2xl p-5 border border-[#3D3654]">
-      <h2 className="text-white font-semibold mb-4 flex items-center gap-2">
-        <span className="w-8 h-8 rounded-full bg-[#8B5CF6]/20 flex items-center justify-center text-sm">📅</span>
-        Timeline
-      </h2>
-      
+    <CollapsibleSection 
+      title="Timeline" 
+      icon="📅" 
+      badge={events.length}
+      defaultOpen={true}
+    >
       <div className="relative">
         {/* Vertical line connecting events */}
         <div className="absolute left-[11px] top-3 bottom-3 w-0.5 bg-[#3D3654]" />
         
         <div className="space-y-3">
           {events.map((event, index) => (
-            <TimelineItem key={index} event={event} isLast={index === events.length - 1} />
+            <TimelineItem key={index} event={event} />
           ))}
         </div>
       </div>
-    </section>
+    </CollapsibleSection>
   );
 }
 
-function TimelineItem({ event, isLast }: { event: TimelineEvent; isLast: boolean }) {
+function TimelineItem({ event }: { event: TimelineEvent }) {
   const significanceColors = {
     high: "bg-[#8B5CF6] ring-[#8B5CF6]/30",
     medium: "bg-[#6B7280] ring-[#6B7280]/30",

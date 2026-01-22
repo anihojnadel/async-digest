@@ -3,13 +3,11 @@
 /**
  * ExecutiveSummary Component
  * 
- * Displays the high-level summary of the discussion:
- * - What was discussed
- * - Why it matters
- * - What changed
+ * Displays the high-level summary of the discussion.
  */
 
 import { Digest } from "@/lib/types";
+import { CollapsibleSection } from "./CollapsibleSection";
 
 interface ExecutiveSummaryProps {
   summary: Digest["executiveSummary"];
@@ -17,12 +15,7 @@ interface ExecutiveSummaryProps {
 
 export function ExecutiveSummary({ summary }: ExecutiveSummaryProps) {
   return (
-    <section className="bg-[#1E1B2E] rounded-2xl p-5 border border-[#3D3654]">
-      <h2 className="text-white font-semibold mb-4 flex items-center gap-2">
-        <span className="w-8 h-8 rounded-full bg-[#8B5CF6]/20 flex items-center justify-center text-sm">📋</span>
-        Executive Summary
-      </h2>
-      
+    <CollapsibleSection title="Executive Summary" icon="📋" defaultOpen={true}>
       <div className="space-y-3">
         <SummaryBlock 
           title="What Was Discussed" 
@@ -40,7 +33,7 @@ export function ExecutiveSummary({ summary }: ExecutiveSummaryProps) {
           color="green"
         />
       </div>
-    </section>
+    </CollapsibleSection>
   );
 }
 
