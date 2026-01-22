@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Async Digest
+
+Transform scattered Slack threads and Loom videos into a single, actionable digest. Stop chasing answers, start making decisions.
+
+## Overview
+
+Modern product and design teams work asynchronously using Slack threads and Loom videos. Feedback and decisions are fragmented across these channels, creating invisible work: chasing answers, re-explaining context, and re-synthesizing discussions.
+
+Async Digest consolidates distributed async inputs into a single structured digest, providing:
+
+- **Executive Summary**: What was discussed, why it matters, what changed
+- **Timeline**: Condensed chronological view of how the discussion evolved
+- **Decisions**: Organized by status (decided, pending, blocked)
+- **Action Items**: With owners and status tracking
+- **Open Questions**: Things still unresolved
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm
+
+### Installation
 
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app will be available at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables (Optional)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file to enable real AI processing:
 
-## Learn More
+```
+OPENAI_API_KEY=sk-your-api-key-here
+```
 
-To learn more about Next.js, take a look at the following resources:
+When no API key is provided, the app uses mock AI responses for demo purposes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Open the app in your browser
+2. Paste one or more Slack thread or Loom video links (one per line)
+3. Click "Generate Digest"
+4. Review the structured output
 
-## Deploy on Vercel
+### Demo Mode
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Click "Load Sample" to use pre-configured demo links that demonstrate the app's capabilities without requiring real Slack/Loom integrations.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Architecture
+
+```
+src/
+├── app/
+│   ├── page.tsx              # Main UI
+│   ├── layout.tsx            # Root layout
+│   └── api/generate/         # API endpoint
+├── lib/
+│   ├── types.ts              # TypeScript interfaces
+│   ├── normalizer.ts         # Input normalization
+│   ├── ai-processor.ts       # AI pipeline orchestration
+│   ├── mock-ai.ts            # Mock AI responses
+│   └── openai-client.ts      # Real OpenAI integration
+├── mocks/
+│   ├── slack-data.ts         # Mock Slack thread data
+│   └── loom-data.ts          # Mock Loom transcript/comments
+└── components/
+    ├── InputForm.tsx         # Link input UI
+    ├── DigestView.tsx        # Structured output display
+    ├── ExecutiveSummary.tsx  # Summary section
+    ├── Timeline.tsx          # Chronological view
+    ├── Decisions.tsx         # Decisions section
+    ├── ActionItems.tsx       # Action items section
+    └── OpenQuestions.tsx     # Open questions section
+```
+
+### Data Flow
+
+1. **Input**: User pastes Slack/Loom URLs
+2. **Parsing**: URLs are validated and categorized by source type
+3. **Normalization**: Data is fetched (from mocks or APIs) and converted to a common format:
+   ```typescript
+   {
+     source: "slack" | "loom",
+     author: string,
+     timestamp: string,
+     content: string
+   }
+   ```
+4. **AI Processing**: Entries are analyzed to extract:
+   - Topic clusters
+   - Decisions (decided/pending/blocked)
+   - Action items with owners
+   - Open questions
+   - Disagreements and repeated feedback
+5. **Output**: Structured digest rendered as readable UI
+
+## Key Principles
+
+- **Consolidation, not invention**: AI is used to structure information, not to decide
+- **Conservative extraction**: When in doubt, mark items as "pending" or "open"
+- **Attribution**: Only attribute statements to people who actually said them
+- **Transparency**: Clear indication of AI mode (OpenAI vs mock)
+
+## Tech Stack
+
+- **Framework**: Next.js 16 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **AI**: OpenAI GPT-4 (optional)
+
+## Development
+
+```bash
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+
+# Run linting
+npm run lint
+```
+
+## License
+
+MIT
